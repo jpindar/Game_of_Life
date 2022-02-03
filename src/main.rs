@@ -67,10 +67,29 @@ impl World {
     }
 }
 
+fn specify_world(world: &mut World) {
+    world.map = [
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    ];
+}
+
 fn main() {
     let mut world = World::new();
-    world.randomize();
+    // world.randomize();
+    specify_world(&mut world);
     world.show();
-    world.update();
-    world.show();
+
+    for i in 0..8 {
+        world.update();
+        world.show();
+    }
 }
