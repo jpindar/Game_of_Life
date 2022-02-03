@@ -21,20 +21,23 @@ impl World {
         }
         println!();
     }
+
+    fn randomize(&mut self) {
+        let density = 0.2; // fraction of cells that will be alive
+        for i in 1..=SIZE {
+            for j in 1..=SIZE {
+                self.map[i][j] = if (rand::random::<u8>() < (density * 256.0) as u8) {
+                    1
+                } else {
+                    0
+                };
+            }
+        }
+    }
 }
 
 fn main() {
     let mut world = World::new();
-    let density = 40;
-    for i in 1..=SIZE {
-        for j in 1..=SIZE {
-            if rand::random::<u8>() < density {
-                world.map[i][j] = 1;
-            } else {
-                world.map[i][j] = 0;
-            }
-        }
-    }
-
+    world.randomize();
     world.show();
 }
