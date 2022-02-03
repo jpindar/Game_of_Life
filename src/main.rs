@@ -13,7 +13,7 @@ impl World {
         }
     }
 
-    fn show(self) {
+    fn show(&self) {
         for i in 1..=SIZE {
             for j in 1..=SIZE {
                 if self.map[i][j] == 1 {
@@ -40,10 +40,37 @@ impl World {
             }
         }
     }
+
+    fn update(&mut self) {
+        let mut new_world = World::new(); // initialize new map with 0s
+        for i in 1..=SIZE {
+            for j in 1..=SIZE {
+                let mut count = 0;
+                count += self.map[i - 1][j];
+                count += self.map[i - 1][j - 1];
+                count += self.map[i - 1][j + 1];
+                count += self.map[i + 1][j - 1];
+                count += self.map[i + 1][j];
+                count += self.map[i + 1][j + 1];
+                count += self.map[i][j - 1];
+                count += self.map[i][j + 1];
+
+                if (self.map[i][j] == 1) && (count == 2 || count == 3) {
+                    new_world.map[i][j] = 1;
+                }
+                if (self.map[i][j] == 0) && (count == 3) {
+                    new_world.map[i][j] = 1;
+                }
+            }
+        }
+        self.map = new_world.map;
+    }
 }
 
 fn main() {
     let mut world = World::new();
     world.randomize();
+    world.show();
+    world.update();
     world.show();
 }
