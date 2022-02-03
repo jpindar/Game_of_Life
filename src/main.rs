@@ -15,7 +15,12 @@ impl World {
     fn show(self) {
         for i in 1..=SIZE {
             for j in 1..=SIZE {
-                print!("{}", self.map[i][j]);
+                if self.map[i][j] == 1 {
+                    print!("#");
+                } else {
+                    print!(".");
+                }
+                //print!("{}", self.map[i][j]);
             }
             println!("");
         }
