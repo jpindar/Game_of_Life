@@ -1,8 +1,9 @@
 // Conway's Game of Life
+mod tests;
 
 const SIZE: usize = 8;
 
-struct World {
+pub struct World {
     map: [[u8; SIZE + 2]; SIZE + 2], // leave a border of 1 cell around the map
 }
 impl World {
